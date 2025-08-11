@@ -11,7 +11,7 @@ import { CardLog } from '../module/automation/entities/card-log.entity';
       port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5433,
       username: process.env.DB_USERNAME ?? 'postgres',
       password: process.env.DB_PASSWORD ?? 'postgres',
-      database: process.env.DB_NAME ?? 'automation',
+      database: process.env.DB_NAME ?? 'automate',
       entities: [User, CardLog],
       synchronize: true,
       logging: true,
