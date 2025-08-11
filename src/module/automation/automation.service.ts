@@ -44,23 +44,32 @@ export class AutomationService {
 
       // Navigate to Paramount+
       await this.retryAction(async () => {
-        await page.goto('https://www.paramountplus.com', { waitUntil: 'networkidle2' });
+        await page.goto('https://www.paramountplus.com/intl/account/signin/', { waitUntil: 'networkidle2' });
       }, 'Navigate to Paramount+');
 
       // Click Sign In
-      await this.retryAction(async () => {
-        await page.waitForSelector('a[href*="signin"]', { timeout: 10000 });
-        await page.click('a[href*="signin"]');
-      }, 'Click Sign In');
+      // await this.retryAction(async () => {
+      //   await page.waitForSelector('.header__account', { timeout: 100000 });
+      //   // await page.waitForSelector('a[href*="signin"]', { timeout: 30000 });
+      //   await page.click('a[href*="signin"]');
+      // }, 'Continue');
+      // }, 'Click Sign In');
 
       // Wait for login form and fill credentials
       await this.retryAction(async () => {
         await page.waitForSelector('input[type="email"]', { timeout: 10000 });
         await page.type('input[type="email"]', user.paramountEmail);
         await page.type('input[type="password"]', user.paramountPassword);
-        await page.click('button[type="submit"]');
-      }, 'Fill login credentials');
-
+      
+        // await page.click('button[type="submit"]');
+      //   await page.waitForSelector('button.qt-continuebtn:not(.disabled)', {
+      //     visible: true,
+      //     timeout: 10000
+      // });
+      await page.click('button.qt-continuebtn');
+      }, 'Continue');
+      // }, 'Fill login credentials');
+      console.log('THIS IS JUST A TEST');
       // Wait for login to complete
       await this.retryAction(async () => {
         await page.waitForNavigation({ waitUntil: 'networkidle2' });

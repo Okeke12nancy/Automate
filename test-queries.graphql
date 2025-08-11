@@ -1,0 +1,87 @@
+# GraphQL Test Queries
+# Copy and paste these queries into GraphQL Playground at http://localhost:3000/graphql
+
+# 1. Create a new user
+mutation CreateUser {
+  createUser(createUserInput: {
+    email: "test@example.com"
+    password: "password123"
+    name: "John Doe"
+  }) {
+    id
+    email
+    name
+    createdAt
+  }
+}
+
+# 2. Login to get JWT token
+mutation Login {
+  login(loginInput: {
+    email: "test@example.com"
+    password: "password123"
+  }) {
+    access_token
+    user {
+      id
+      email
+      name
+    }
+  }
+}
+
+# 3. Get all users (requires authentication - add Authorization header)
+query GetUsers {
+  users {
+    id
+    email
+    name
+    createdAt
+  }
+}
+
+# 4. Get specific user by ID (requires authentication)
+query GetUser {
+  user(id: "USER_ID_HERE") {
+    id
+    email
+    name
+    createdAt
+  }
+}
+
+# 5. Test automation - Add card to Paramount (requires authentication)
+mutation AddCardToParamount {
+  addCardToParamount(input: {
+    userId: "USER_ID_HERE"
+    cardNumber: "1234567890123456"
+    cardholderName: "John Doe"
+    expiryMonth: "12"
+    expiryYear: "25"
+    cvv: "123"
+  }) {
+    success
+    message
+    errorMessage
+  }
+}
+
+# 6. Get card logs for a user (requires authentication)
+query GetCardLogs {
+  cardLogs(userId: "USER_ID_HERE") {
+    id
+    cardNumber
+    status
+    createdAt
+  }
+}
+
+# Instructions:
+# 1. Start your application: npm run start:dev
+# 2. Open http://localhost:3000/graphql in your browser
+# 3. Run CreateUser first to create a test user
+# 4. Run Login to get your JWT token
+# 5. In GraphQL Playground, click "HTTP HEADERS" at the bottom left
+# 6. Add: { "Authorization": "Bearer YOUR_JWT_TOKEN_HERE" }
+# 7. Now you can test the protected queries (GetUsers, GetUser, etc.)
+# 8. Replace "USER_ID_HERE" with the actual user ID from your CreateUser response

@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ID, Context } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
@@ -20,6 +20,13 @@ export class UserResolver {
   findAll() {
     return this.userService.findAll();
   }
+
+//   @UseGuards(JwtAuthGuard)
+// @Query(() => User)
+// me(@Context() context) {
+//   return context.req.user;
+// }
+
 
   @Query(() => User, { name: 'user' })
   @UseGuards(JwtAuthGuard)

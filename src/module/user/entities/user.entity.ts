@@ -4,7 +4,8 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 @ObjectType()
 @Entity()
 export class User {
-  @Field(() => ID)
+  @Field(() => ID, { nullable: false })
+  // @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,11 +20,13 @@ export class User {
   @Column()
   password: string;
 
-  @Field()
+  // @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
   paramountEmail?: string;
 
-  @Field()
+  // @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
   paramountPassword?: string;
 
