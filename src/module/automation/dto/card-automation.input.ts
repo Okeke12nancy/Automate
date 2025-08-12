@@ -28,8 +28,34 @@ export class CardAutomationInput {
   @IsNotEmpty()
   cvv: string;
 
+  @Field()
+  @IsString()
+  @IsNotEmpty()
+  city: string;
+
+  @Field()
+  @IsString()
+  @IsNotEmpty()
+  address: string;
+
+  @Field()
+  @IsString()
+  @IsNotEmpty()
+  state: string;
+
+  @Field()
+  @IsString()
+  @IsNotEmpty()
+  zipCode: string;
+
+
   @Field({ nullable: true })
   @IsString()
   @IsOptional()
-  cardholderName?: string;
+  firstName?: string;
+
+  @Field({ nullable: true })
+  @IsString()
+  @IsOptional()
+  lastName?: string;
 }
